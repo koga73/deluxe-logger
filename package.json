@@ -1,0 +1,40 @@
+{
+	"name": "deluxe-logger",
+	"version": "1.0.0",
+	"description": "A logger for console / files / memory",
+	"type": "module",
+	"exports": {
+		".": "./src/deluxe-logger.js",
+		"./level": "./src/level.js",
+		"./output": "./src/output.js",
+		"./token": "./src/token.js",
+		"./output/console": "./src/output/console-output.js",
+		"./output/file": "./src/output/file-output.js",
+		"./output/memory": "./src/output/memory-output.js"
+	},
+	"scripts": {
+		"test": "node ./test/test.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/koga73/deluxe-logger.git"
+	},
+	"keywords": [
+		"deluxe",
+		"logger",
+		"debug",
+		"info",
+		"log",
+		"warn",
+		"error",
+		"console",
+		"file",
+		"memory"
+	],
+	"author": "AJ Savino",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/koga73/deluxe-logger/issues"
+	},
+	"homepage": "https://github.com/koga73/deluxe-logger#readme"
+}
