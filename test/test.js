@@ -1,18 +1,10 @@
-# deluxe-logger
-
-A logger for console / files / memory
-
-```js
 import DeluxeLogger, {OUTPUT} from "../src/deluxe-logger.js";
 
 (async function main(args) {
 	let exitCode = 0;
 
 	const logger = DeluxeLogger.getInstance({
-		outputs: [
-			DeluxeLogger.DEFAULT_OUTPUT.CONSOLE,
-			DeluxeLogger.DEFAULT_OUTPUT.FILE
-		]
+		outputs: [DeluxeLogger.DEFAULT_OUTPUT.CONSOLE, DeluxeLogger.DEFAULT_OUTPUT.FILE]
 	});
 
 	try {
@@ -39,4 +31,3 @@ import DeluxeLogger, {OUTPUT} from "../src/deluxe-logger.js";
 
 	process.exit(exitCode);
 })(process.argv.splice(2));
-```
