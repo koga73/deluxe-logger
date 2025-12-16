@@ -1,6 +1,6 @@
 {
 	"name": "deluxe-logger",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A logger for console / files / memory",
 	"type": "module",
 	"exports": {

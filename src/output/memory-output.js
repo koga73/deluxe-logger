@@ -23,7 +23,7 @@ class MemoryOutput extends Output {
 			return;
 		}
 
-		_buffer.push(level.format(...args));
+		_buffer.push(new MemoryItem(level, level.format(...args)));
 		if (_maxBufferSize > 0 && _buffer.length > _maxBufferSize) {
 			_buffer.shift();
 		}
@@ -43,3 +43,11 @@ class MemoryOutput extends Output {
 	}
 }
 export default MemoryOutput;
+
+class MemoryItem {
+	constructor(level, message) {
+		this.level = level;
+		this.message = message;
+	}
+}
+export {MemoryItem};
