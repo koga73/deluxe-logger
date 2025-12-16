@@ -8,7 +8,7 @@ import Token from "./token.js";
 
 import ConsoleOutput from "./output/console-output.js";
 import FileOutput from "./output/file-output.js";
-import MemoryOutput from "./output/memory-output.js";
+import MemoryOutput, {MemoryItem} from "./output/memory-output.js";
 
 export const OUTPUT = {
 	CONSOLE: 1 << 0,
@@ -75,4 +75,4 @@ class DeluxeLogger {
 export default DeluxeLogger;
 
 export {Token, Level, Output};
-export {ConsoleOutput, FileOutput, MemoryOutput};
+export {ConsoleOutput, FileOutput, MemoryOutput, MemoryItem};

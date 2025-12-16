@@ -1,12 +1,22 @@
-import DeluxeLogger, {OUTPUT} from "../src/deluxe-logger.js";
+import DeluxeLogger, {OUTPUT, ConsoleOutput, FileOutput, MemoryOutput} from "../src/deluxe-logger.js";
 
 (async function main(args) {
 	let exitCode = 0;
 
+	// Create logger instance with multiple outputs
 	const logger = DeluxeLogger.getInstance({
-		outputs: [DeluxeLogger.DEFAULT_OUTPUT.CONSOLE, DeluxeLogger.DEFAULT_OUTPUT.FILE]
+		outputs: [
+			new ConsoleOutput({id: OUTPUT.CONSOLE}),
+			new FileOutput({
+				id: OUTPUT.FILE,
+				filePath: "./logs",
+				formatFileName: `test_${FileOutput.DEFAULT_FORMAT.FILENAME}`
+			}),
+			new MemoryOutput({id: OUTPUT.MEMORY})
+		]
 	});
 
+	// Main application code
 	try {
 		logger.debug("This is a debug message");
 		logger.info("This is an info message");
@@ -28,6 +38,14 @@ import DeluxeLogger, {OUTPUT} from "../src/deluxe-logger.js";
 		logger.log();
 		logger.flush();
 	}
+
+	// Display memory output contents
+	/*
+	const memoryLogger = logger.getOutput(OUTPUT.MEMORY);
+	for (const item of memoryLogger.getMemory()) {
+		console.log(JSON.stringify(item, null, 2));
+	}
+	*/
 
 	process.exit(exitCode);
 })(process.argv.splice(2));
