@@ -49,7 +49,7 @@ import DeluxeLogger, {OUTPUT, ConsoleOutput, FileOutput, MemoryOutput} from "../
 	const memoryLogger = logger.getOutput(OUTPUT.MEMORY);
 	for (const item of memoryLogger.getMemory()) {
 		console.log(JSON.stringify(item, null, 2));
-	}
+	} 
 	*/
 
 	process.exit(exitCode);
