@@ -38,6 +38,10 @@ class Level {
 		return Level._formatMessage(this, ...args);
 	}
 
+	toString() {
+		return this.name.toUpperCase();
+	}
+
 	static _formatMessage(level, ...args) {
 		const {name, formatMessage} = level;
 
