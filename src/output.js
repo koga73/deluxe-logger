@@ -13,5 +13,9 @@ class Output {
 	doLog(level, ...args) {
 		throw new Error("Not implemented");
 	}
+
+	getLevel(idOrName) {
+		return this.outputs.find((output) => output.id === idOrName || output.name === idOrName) || null;
+	}
 }
 export default Output;
