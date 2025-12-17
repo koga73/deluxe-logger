@@ -22,16 +22,24 @@ class Level {
 		MESSAGE: `${Token.MESSAGE}`, //message
 		TIMESTAMP: "YYYY-MM-DD HH:mm:ss.SSS", //2025-12-11 11:20:38.533
 		OBJECT: {
-			[Error.name]: `${Token.MESSAGE}\n${" ".repeat(4)}${Token.STACK}\n` //message\nstack
+			[Error.name]: `${Token.MESSAGE}\n${Token.STACK}\n` //message\nstack
 		}
 	};
 
-	constructor({id, name, formatMessage = Level.DEFAULT_FORMAT.MESSAGE, formatTimestamp = Level.DEFAULT_FORMAT.TIMESTAMP, formatObject = Level.DEFAULT_FORMAT.OBJECT} = {}) {
+	constructor({
+		id,
+		name,
+		formatMessage = Level.DEFAULT_FORMAT.MESSAGE,
+		formatTimestamp = Level.DEFAULT_FORMAT.TIMESTAMP,
+		formatObject = Level.DEFAULT_FORMAT.OBJECT,
+		indentNewLine = true
+	} = {}) {
 		this.id = id;
 		this.name = name;
 		this.formatMessage = formatMessage;
 		this.formatTimestamp = formatTimestamp;
 		this.formatObject = formatObject;
+		this.indentNewLine = indentNewLine;
 	}
 
 	format(...args) {
@@ -43,7 +51,7 @@ class Level {
 	}
 
 	static _formatMessage(level, ...args) {
-		const {name, formatMessage} = level;
+		const {name, formatMessage, formatTimestamp, indentNewLine} = level;
 
 		const formattedArgs = args.reduce((args, arg) => {
 			if (typeof arg === "function") {
@@ -61,8 +69,15 @@ class Level {
 		if (formatMessage.indexOf(Token.LEVEL) !== -1) {
 			output = output.replace(Token.LEVEL, name.toUpperCase());
 		}
+
+		// Grab index of where message starts while ignoring ANSI color codes
+		const messageIndex = output.replace(/\x1b\[\d+m/g, "").indexOf(Token.MESSAGE) - 1;
 		if (formatMessage.indexOf(Token.MESSAGE) !== -1) {
 			output = output.replace(Token.MESSAGE, util.format(...formattedArgs));
+		}
+
+		if (messageIndex > 0 && indentNewLine) {
+			output = output.replace(/\n(.+)/g, `\n${" ".repeat(messageIndex)}$1`);
 		}
 		return output;
 	}

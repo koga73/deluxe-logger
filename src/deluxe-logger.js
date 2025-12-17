@@ -52,8 +52,8 @@ class DeluxeLogger {
 		}
 	}
 
-	getOutput(id) {
-		return this.outputs.find((output) => output.id === id) || null;
+	getOutput(idOrName) {
+		return this.outputs.find((output) => output.id === idOrName || output.name === idOrName) || null;
 	}
 
 	flush() {
